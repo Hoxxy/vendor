@@ -1,0 +1,30 @@
+.spacer {
+  flex: 1 1 auto;
+  padding: 0 15px;
+}
+
+.toolbar-container {
+  border-bottom: 1px solid #eee;
+}
+
+mat-toolbar {
+  width: 63%;
+  height: 70px;
+  margin: auto;
+  background-color: transparent;
+}
+
+mat-toolbar > button {
+  background-color: transparent;
+}
+
+mat-toolbar > button:hover {
+  background-color: #eee;
+}
+
+@media screen and (max-width: 992px) {
+  mat-toolbar {
+    width: 100%;
+    margin: 0%;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="toolbar-container">
+  <mat-toolbar>
+    <a routerLink="/" style="text-decoration: none"><span style="
+          font-family: 'Monoton', cursive;
+          font-weight: bold;
+          font-size: 24px;
+          color: black;
+        ">VENDOR</span></a>
+
+    <span class="spacer"></span>
+
+    <div *ngIf="this.userService.isUserResolved">
+      <button mat-button aria-label="Login" routerLink="user/signin" *ngIf="!this.userService.isUserSignedIn">
+        Login
+      </button>
+
+      <span class="spacer"></span>
+
+      <button mat-button aria-label="Shop" routerLink="shop">Shop</button>
+
+      <span class="spacer"></span>
+
+      <button mat-button aria-label="Cart" routerLink="cart" [matBadge]="this.cartService.simpleCartList.length"
+        matBadgePosition="after" matBadgeColor="accent" [matBadgeDisabled]="!this.cartService.simpleCartList.length">
+        Cart
+      </button>
+
+      <span class="spacer"></span>
+
+      <button mat-button aria-label="Profile" routerLink="user/profile" *ngIf="this.userService.isUserSignedIn">
+        Profile
+      </button>
+
+      <span class="spacer"></span>
+
+      <button mat-button aria-label="My Orders" routerLink="user/orders" *ngIf="this.userService.isUserSignedIn">
+        My Orders
+      </button>
+
+      <span class="spacer"></span>
+
+      <button mat-button aria-label="Sign out" routerLink="user/signout" *ngIf="this.userService.isUserSignedIn">
+        Sign Out
+      </button>
+    </div>
+  </mat-toolbar>
+</div>

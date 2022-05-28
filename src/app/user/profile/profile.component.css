@@ -1,0 +1,14 @@
+mat-card {
+  max-width: 550px;
+  margin: 2em auto;
+}
+
+@media screen and (max-width: 992px) {
+  .mat-card {
+    margin-left: 0 20px;
+  }
+}
+
+a {
+  color: inherit;
+}

@@ -1,0 +1,123 @@
+<div fxLayout="row" class="page-container">
+  <div fxLayout="column" class="cart-container" fxFlex="65" *ngIf="this.cartService.cartList.length > 0">
+      <div fxLayout="row">
+          <div fxFlex="50" style="text-align: left;">
+              <h1>Shopping Cart</h1>
+          </div>
+          <div fxFlex="50" style="text-align: right;">
+              <h1>{{ this.cartService.cartList.length }} Items</h1>
+          </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div fxLayout="row" class="column-titles">
+          <div fxFlex="40" style="text-align: left;">Product details</div>
+          <div fxFlex="20" style="text-align: center;">Quantity</div>
+          <div fxFlex="20" style="text-align: center;">Price</div>
+          <div fxFlex="20" style="text-align: center;">Total</div>
+      </div>
+
+      <div fxLayout="row" class="cart-item" *ngFor="let cart of this.cartService.cartList; let i = index">
+          <div fxFlex="40" fxLayout="row">
+              <div class="product-image">
+                  <img [src]="'./assets/images/product-' + cart.product.id + '.jpg'">
+              </div>
+              <div class="product-info" fxLayout="column">
+                  <p fxFlex="80" class="product-name" fxLayoutAlign="start center"><a [routerLink]="['/product', cart.product.id]">{{ cart.product.title }}</a></p>
+                  <p fxFlex="20" class="product-remove" fxLayoutAlign="start center" (click)="this.cartService.removeFromCart(i)">
+                    Remove</p>
+              </div>
+          </div>
+          <div fxFlex="20" fxLayoutAlign="center center">
+              <quantity-control [quantity]="cart.quantity" (onQuantityChange)="changeQuantity($event, i)"></quantity-control>
+          </div>
+          <div fxFlex="20" fxLayoutAlign="center center" class="item-price">€{{ cart.product.price.toFixed(2) }}</div>
+          <div fxFlex="20" fxLayoutAlign="center center" class="item-price">€{{ (cart.product.price *
+              cart.quantity).toFixed(2) }}</div>
+      </div>
+
+      <div>
+          <a routerLink="/shop" class="return-button">←&nbsp;&nbsp;Continue Shopping</a>
+      </div>
+  </div>
+
+  <div fxLayout="column" class="cart-container" fxFlex="65" *ngIf="this.cartService.cartList.length <= 0">
+      <div fxLayout="row">
+          <div fxFlex="50" style="text-align: left;">
+              <h1>Shopping Cart</h1>
+          </div>
+          <div fxFlex="50" style="text-align: right;">
+              <h1>{{ this.cartService.cartList.length }} Items</h1>
+          </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <p>Shopping Cart is empty. Go to the <a routerLink="/shop" style="color:inherit;">Shop</a> to start browsing our products.</p>
+  </div>
+
+  <div fxLayout="column" class="overview-container" fxFlex="35" fxLayoutAlign="start start">
+      <div>
+          <h1>Order Summary</h1>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div fxLayout="column" style="width:100%;">
+          <span>Shipping Method</span>
+          <mat-form-field appearance="outline">
+              <mat-select [(value)]="selectedShippingMethod">
+                  <mat-option value="15">
+                      Standard Delivery - €15.00
+                  </mat-option>
+                  <mat-option value="50">
+                      Express Delivery - €50.00
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+
+
+          <form (ngSubmit)="this.promoService.applyPromoCode(promoCode.value)" fxLayout="column">
+              <span>Promo Code</span>
+              <mat-form-field appearance="outline">
+                  <input type="text" ngModel matInput name="promoCode" #promoCode="ngModel">
+                  <mat-hint>Use the code "20OFF" to get a 20% discount.</mat-hint>
+              </mat-form-field>
+
+              <div fxLayout="row">
+                  <button mat-raised-button color="warn" fxFlex="30">Apply</button>
+              </div>
+
+          </form>
+
+          <mat-divider style="margin: 30px 0px;"></mat-divider>
+
+          <div class="price-overview">
+              <div fxLayout="row">
+                  <span fxFlex="50" fxLayoutAlign="start">Subtotal</span>
+                  <span fxFlex="50" fxLayoutAlign="end">{{ this.cartService.subtotal.toFixed(2) }}</span>
+              </div>
+
+              <div fxLayout="row">
+                  <span fxFlex="50" fxLayoutAlign="start">Shipping</span>
+                  <span fxFlex="50" fxLayoutAlign="end">€{{ this.getShippingCost().toFixed(2) }}</span>
+              </div>
+
+              <div fxLayout="row">
+                  <span fxFlex="50" fxLayoutAlign="start">Promo code</span>
+                  <span fxFlex="50" fxLayoutAlign="end">€-{{ this.cartService.promoDeduction.toFixed(2) }}</span>
+              </div>
+
+              <mat-divider style="margin: 10px 0px;"></mat-divider>
+
+              <div fxLayout="row">
+                  <span fxFlex="50" fxLayoutAlign="start">Total</span>
+                  <span fxFlex="50" fxLayoutAlign="end">€{{ this.cartService.calculateTotal(this.getShippingCost()).toFixed(2) }}</span>
+              </div>
+          </div>
+
+          <button mat-raised-button color="primary" id="checkout" (click)="goToCheckout()">Checkout</button>
+      </div>
+  </div>
+</div>

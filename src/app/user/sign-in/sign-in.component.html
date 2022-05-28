@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-content>
+      <mat-card-title style="margin-bottom:15px;">Log In</mat-card-title>
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+          <mat-form-field appearance="outline">
+              <mat-label>E-mail address</mat-label>
+              <input type="email" matInput formControlName="email" />
+              <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput formControlName="password" />
+              <mat-icon matSuffix>lock</mat-icon>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" [disabled]="!signInForm.valid">Log in</button>
+      </form>
+
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer style="padding-top:15px; text-align: center;">
+      <p>Looking to <a routerLink="/user/signup" class="md-accent">create account</a>?</p>
+  </mat-card-footer>
+</mat-card>
+
+<!-- <mat-card>
+  <mat-card-content>
+      <mat-card-title style="margin-bottom:15px;">Log In</mat-card-title>
+      <form #f="ngForm" (ngSubmit)="this.authService.signIn(emailInput.value, passwordInput.value)">
+
+          <mat-form-field appearance="outline">
+              <mat-label>E-mail address</mat-label>
+              <input type="email" ngModel matInput name="email" #emailInput="ngModel" required />
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="emailInput.hasError('required')">This is a required field.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input type="password" ngModel matInput name="password" #passwordInput="ngModel" minlength="8"
+                  required />
+              <mat-icon matSuffix>lock</mat-icon>
+              <mat-error *ngIf="passwordInput.hasError('required')">This is a required field.</mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary">Log in</button>
+      </form>
+
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer style="padding-top:15px; text-align: center;">
+      <p>Looking to <a routerLink="/signup" class="md-accent">create account</a>?</p>
+  </mat-card-footer>
+</mat-card> -->

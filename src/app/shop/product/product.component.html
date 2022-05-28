@@ -1,0 +1,75 @@
+<div class="product-page" fxLayout="column" *ngIf="this.productService.product">
+  <div class="product-page-container">
+
+    <ol class="product-breadcrumbs">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li class="breadcrumb-item"> / <a routerLink="/shop">Shop</a></li>
+      <li class="breadcrumb-item"> / <a routerLink="/shop" [queryParams]="{category: this.productService.product.category}">{{ this.productService.category.title }}</a></li>
+      <li class="breadcrumb-item"> / {{ this.productService.product.title }}</li>
+    </ol>
+
+    <div fxLayout="row" fxLayout.lt-md="column" ngStyle.lt-md="margin-top:0px;" style="margin-top:50px">
+      <div fxFlex="50">
+        <img [src]="this.productService.product.image" class="product-details-image">
+      </div>
+      <div fxFlex="50">
+        <div class="product-details-row">
+          <div class="product-brand">{{ this.productService.category.title }}</div>
+          <h1 class="product-title">{{ this.productService.product.title }}</h1>
+          <div class="product-price" *ngIf="!!this.productService.product.stock">€{{ this.productService.product.price.toFixed(2) }}</div>
+          <div class="product-price" *ngIf="!this.productService.product.stock"><span style="text-decoration: line-through;">€{{
+            this.productService.product.price.toFixed(2) }}</span> - <i>Out of stock</i></div>
+          <div class="product-description">{{ this.productService.product.description }}</div>
+        </div>
+        <div class="product-details-button absolute-center" fxLayout="row">
+          <quantity-control [quantity]="1" (onQuantityChange)="changeQuantity($event)"></quantity-control>
+          <div matTooltip="This product is currently out of stock" [matTooltipDisabled]="!!this.productService.product.stock">
+            <button mat-button class="product-cart-button" [disabled]="!this.productService.product.stock" (click)="this.cartService.addToCart(this.productService.product, quantity)">Add
+              to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="review-container" *ngIf="!this.reviewService.reviews.length">
+          <div fxLayout="column" class="review-container-header">
+              <h2>Reviews (0)</h2>
+              <p class="no-reviews">Be the first person to review this product!</p>
+              <div matTooltip="You're not signed in" [matTooltipDisabled]="this.authService.isUserSignedIn"
+                  matTooltipPosition="below" class="no-reviews-btn">
+                  <button mat-flat-button color="accent" class="no-reviews-btn" (click)="openReviewDialog()"
+                      [disabled]="!this.authService.isUserSignedIn">Write a review</button>
+              </div>
+          </div>
+      </div> -->
+
+    <!-- <div fxLayout="column" class="review-container" *ngIf="this.reviewService.reviews.length">
+          <div fxLayout="row" class="review-container-header">
+              <h2>Reviews ({{this.reviewService.reviews.length}})</h2>
+              <star-rating [starType]="'svg'" [rating]="this.reviewService.avgRating"
+                  [labelText]="this.reviewService.avgRating.toFixed(2)" labelPosition="right" [readOnly]="true">
+              </star-rating>
+
+              <div matTooltip="You're not signed in" [matTooltipDisabled]="this.authService.isUserSignedIn"
+                  matTooltipPosition="above" class="review-write">
+                  <button mat-flat-button color="accent" class="review-write-btn" (click)="openReviewDialog()"
+                      [disabled]="!this.authService.isUserSignedIn">Write a review</button>
+              </div>
+          </div>
+
+
+          <div class="review" fxLayout="column" *ngFor="let review of this.reviewService.reviews; let i = index">
+              <div class="review-details" fxLayout="row">
+                  <div class="review-author">{{ review.displayname }}</div>
+                  <span class="review-spacer">&#183;</span>
+                  <div class="review-date">{{ review.date }}</div>
+                  <star-rating [starType]="'svg'" [rating]="review.rating" [readOnly]="true"></star-rating>
+              </div>
+              <div class="review-text">
+                  <p>{{ review.text }}</p>
+              </div>
+          </div>
+
+      </div> -->
+  </div>
+</div>

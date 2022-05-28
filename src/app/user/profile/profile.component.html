@@ -1,0 +1,119 @@
+<mat-card>
+  <mat-card-content>
+      <div>
+          <h1 style="margin-bottom:15px;">Your Profile</h1>
+          <div fxLayout="column">
+              <form (ngSubmit)="onSubmitCredentials()" [formGroup]="editProfileCredentialsForm">
+
+                  <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                      <mat-form-field appearance="outline" fxFlex="100">
+                          <mat-label>E-mail address</mat-label>
+                          <mat-icon matSuffix>email</mat-icon>
+                          <input type="email" matInput id="email" formControlName="email" />
+                          <mat-error>{{ displayMessage['email'] }}</mat-error>
+                      </mat-form-field>
+                  </div>
+
+                  <div formGroupName="passwordGroup" fxLayout="row" fxLayout.lt-md="column" fxFlexFill fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                      <mat-form-field appearance="outline" fxFlex="50">
+                          <mat-label>Password</mat-label>
+                          <mat-icon matSuffix>lock</mat-icon>
+                          <input type="password" matInput id="password" formControlName="password" />
+                          <mat-error>{{ displayMessage['password'] }}</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" fxFlex="50">
+                          <mat-label>Repeat pasword</mat-label>
+                          <mat-icon matSuffix>lock</mat-icon>
+                          <input type="password" id="passwordConfirm" matInput formControlName="passwordConfirm" />
+                          <mat-error>{{ displayMessage['passwordGroup'] }}</mat-error>
+                      </mat-form-field>
+                  </div>
+
+                  <div fxLayout="row" fxLayoutGap="20px" style="padding-top:10px;">
+                      <button type="submit" mat-raised-button color="primary" fxFlex="100" [disabled]="!editProfileCredentialsForm.valid">Save Changes</button>
+                  </div>
+
+              </form>
+          </div>
+      </div>
+      <div style="padding-bottom: 50px;">
+          <h1 style="margin-top:50px; margin-bottom:15px;">Your Address</h1>
+          <div fxLayout="column">
+              <form (ngSubmit)="onSubmitAddress()" [formGroup]="editAddressForm">
+
+                  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" fxFlexFill>
+                      <mat-form-field appearance="outline" fxFlex="50">
+                          <mat-label>First Name</mat-label>
+                          <input type="text" matInput id="firstName" formControlName="firstName" />
+                          <mat-error>{{ displayMessage['firstName'] }}</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" fxFlex="50">
+                        <mat-label>Last Name</mat-label>
+                        <input type="text" matInput id="lastName" formControlName="lastName" />
+                        <mat-error>{{ displayMessage['lastName'] }}</mat-error>
+                      </mat-form-field>
+                  </div>
+
+                  <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                      <mat-form-field appearance="outline" fxFlex="100">
+                          <mat-label>Phone Number</mat-label>
+                          <mat-icon matSuffix>phone</mat-icon>
+                          <input type="text" matInput formControlName="phone" />
+                          <mat-error>{{ displayMessage['phone'] }}</mat-error>
+                      </mat-form-field>
+                  </div>
+
+                  <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                      <mat-form-field appearance="outline" fxFlex="50">
+                          <mat-label>City</mat-label>
+                          <mat-icon matSuffix>apartment</mat-icon>
+                          <input type="text" matInput formControlName="city" />
+                          <mat-error>{{ displayMessage['city'] }}</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" fxFlex="50">
+                          <mat-label>Postcode</mat-label>
+                          <mat-icon matSuffix>apartment</mat-icon>
+                          <input type="text" matInput formControlName="postcode" />
+                          <mat-error>{{ displayMessage['postcode'] }}</mat-error>
+                      </mat-form-field>
+                  </div>
+
+                  <div fxLayout="column" fxFlexFill>
+                      <mat-form-field appearance="outline" fxFlex="100">
+                          <mat-label>Address</mat-label>
+                          <mat-icon matSuffix>home</mat-icon>
+                          <input type="text" matInput formControlName="address1" />
+                          <mat-error>{{ displayMessage['address1'] }}</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" fxFlex="100">
+                          <mat-label>Address (2nd line - optional)</mat-label>
+                          <input type="text" matInput formControlName="address2" />
+                      </mat-form-field>
+                  </div>
+
+                  <!-- <div fxLayout="column" fxFlexFill>
+                      <mat-form-field appearance="outline">
+                          <mat-label>Country</mat-label>
+                          <mat-select [formControl]="this.authService.countrySelect" required>
+                              <mat-option *ngFor="let country of this.authService.countries" [value]="country.value">
+                                  {{country.value}}
+                              </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="this.authService.countrySelect.hasError('required')">Please select your
+                              country.</mat-error>
+                      </mat-form-field>
+                  </div> -->
+
+                  <div fxLayout="row" fxLayoutGap="20px" style="padding-top:10px;">
+                      <button type="submit" mat-raised-button color="primary" fxFlex="100" [disabled]="!editAddressForm.valid || !editAddressForm.dirty">Save Changes</button>
+                  </div>
+
+              </form>
+          </div>
+      </div>
+    </mat-card-content>
+  </mat-card>

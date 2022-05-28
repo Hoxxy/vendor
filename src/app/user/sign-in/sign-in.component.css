@@ -1,0 +1,20 @@
+mat-card {
+  max-width: 550px;
+  margin: 2em auto;
+}
+
+mat-form-field {
+  display: block;
+}
+
+button {
+  width: 100%;
+}
+
+p {
+  text-align: center;
+}
+
+a {
+  color: inherit;
+}
